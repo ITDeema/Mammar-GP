@@ -1,6 +1,6 @@
 
 
-# Meyar (معيار) 🏗️✨
+# Mammar (معمـار)
 
 > **An AI-Powered Environmental Site Analysis Web Platform for Residential Plots in Riyadh.**
 
