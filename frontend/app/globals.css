@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --color-stone-50: #F6F4EF;
+  --color-stone-100: #EDE9E1;
+  --color-stone-200: #D9D3C7;
+  --color-stone-400: #A39B8B;
+  --color-stone-600: #6B6459;
+  --color-stone-900: #24201B;
+
+  --color-clay-50: #F7EAE1;
+  --color-clay-500: #A8562E;
+  --color-clay-600: #8E4624;
+  --color-clay-700: #73391D;
+
+  --color-dusk-50: #E6EEEE;
+  --color-dusk-500: #1F4A4D;
+  --color-dusk-600: #193C3E;
+
+  --color-success-50: #E7F3EC;
+  --color-success-500: #2F7D4F;
+  --color-caution-50: #FAF1DE;
+  --color-caution-500: #B5790A;
+  --color-danger-50: #F9E9E6;
+  --color-danger-500: #B3402E;
+
+  --radius-card: 8px;
+  --radius-control: 8px;
+  --radius-pill: 999px;
+  --shadow-overlay: 0 8px 24px rgba(36, 32, 27, 0.14);
+}
+
+@theme inline {
+  --font-heading: var(--font-kufi), var(--font-grotesk), sans-serif;
+  --font-body: var(--font-plex-ar), var(--font-plex), sans-serif;
+}
+
+body {
+  background: var(--color-stone-50);
+  color: var(--color-stone-900);
+  font-family: var(--font-body);
+}
+
+[dir="rtl"] .flip-rtl {
+  transform: scaleX(-1);
+}
