@@ -5,6 +5,7 @@ import {
   IBM_Plex_Sans_Arabic,
   IBM_Plex_Sans,
 } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const kufi = Noto_Kufi_Arabic({ subsets: ["arabic"], variable: "--font-kufi" });
@@ -36,7 +37,9 @@ export default function RootLayout({
       dir="rtl"
       className={`${kufi.variable} ${grotesk.variable} ${plexAr.variable} ${plex.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }
