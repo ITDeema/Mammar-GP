@@ -17,14 +17,14 @@ export default function Input({
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-sm font-semibold text-stone-900">
+      <label htmlFor={id} className="text-sm font-semibold text-navy-900">
         {label}
       </label>
       <input
         id={id}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={`rounded-control border bg-white px-3 py-3 text-sm text-stone-900 placeholder:text-stone-400 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dusk-500 ${error ? "border-danger-500" : "border-stone-200"} ${className}`}
+        className={`rounded-control border bg-white px-3 py-3 text-sm text-navy-900 placeholder:text-navy-900/45 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-navy-700 ${error ? "border-danger-500" : "border-navy-900/15"} ${className}`}
         {...props}
       />
       {error && (

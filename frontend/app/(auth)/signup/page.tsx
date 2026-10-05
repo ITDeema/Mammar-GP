@@ -43,7 +43,7 @@ export default function SignupPage() {
   return (
     <Card className="w-full max-w-md sm:p-8">
       <h1 className="font-heading text-2xl font-bold">{t("signup.title")}</h1>
-      <p className="mt-2 text-sm text-stone-600">{t("signup.subtitle")}</p>
+      <p className="mt-2 text-sm text-navy-900/70">{t("signup.subtitle")}</p>
 
       <form
         onSubmit={handleSubmit}
@@ -89,12 +89,12 @@ export default function SignupPage() {
         />
 
         <div className="flex flex-col gap-2">
-          <label className="flex items-center gap-2 text-sm text-stone-600">
+          <label className="flex items-center gap-2 text-sm text-navy-900/70">
             <input
               type="checkbox"
               checked={accepted}
               onChange={(e) => setAccepted(e.target.checked)}
-              className="h-4 w-4 accent-dusk-500"
+              className="h-4 w-4 accent-navy-900"
             />
             {t("signup.terms")}
           </label>
@@ -108,9 +108,9 @@ export default function SignupPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-stone-600">
+      <p className="mt-6 text-center text-sm text-navy-900/70">
         {t("signup.haveAccount")}{" "}
-        <Link href="/login" className="font-semibold text-clay-500 underline">
+        <Link href="/login" className="font-semibold text-gold-700 underline">
           {t("signup.toLogin")}
         </Link>
       </p>

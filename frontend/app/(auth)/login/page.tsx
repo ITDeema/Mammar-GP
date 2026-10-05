@@ -27,13 +27,13 @@ export default function LoginPage() {
 
     // TODO: call the login API here. Until it exists, any valid-looking
     // input passes. Also change the destination to the plot-selection page.
-    router.push("/profile");
+    router.push("/select-plot");
   }
 
   return (
     <Card className="w-full max-w-md sm:p-8">
       <h1 className="font-heading text-2xl font-bold">{t("login.title")}</h1>
-      <p className="mt-2 text-sm text-stone-600">{t("login.subtitle")}</p>
+      <p className="mt-2 text-sm text-navy-900/70">{t("login.subtitle")}</p>
 
       <form
         onSubmit={handleSubmit}
@@ -62,7 +62,7 @@ export default function LoginPage() {
 
         <Link
           href="/forgot-password"
-          className="self-end text-sm text-stone-600 underline hover:text-stone-900"
+          className="self-end text-sm text-navy-900/70 underline hover:text-navy-900"
         >
           {t("login.forgot")}
         </Link>
@@ -72,9 +72,9 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-stone-600">
+      <p className="mt-6 text-center text-sm text-navy-900/70">
         {t("login.noAccount")}{" "}
-        <Link href="/signup" className="font-semibold text-clay-500 underline">
+        <Link href="/signup" className="font-semibold text-gold-700 underline">
           {t("login.toSignup")}
         </Link>
       </p>

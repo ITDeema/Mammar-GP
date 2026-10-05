@@ -19,7 +19,7 @@ export default function SegmentedControl<T extends string>({
 
   return (
     <fieldset className="m-0 min-w-0 border-0 p-0">
-      <legend className="mb-2 p-0 text-sm font-semibold text-stone-900">
+      <legend className="mb-2 p-0 text-sm font-semibold text-navy-900">
         {label}
       </legend>
       <div className="flex gap-2">
@@ -33,7 +33,7 @@ export default function SegmentedControl<T extends string>({
               onChange={() => onChange(option.value)}
               className="peer sr-only"
             />
-            <span className="block cursor-pointer rounded-control border border-stone-200 bg-white px-4 py-3 text-center text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-100 peer-checked:border-dusk-500 peer-checked:bg-dusk-500 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-dusk-500">
+            <span className="block cursor-pointer rounded-control border border-navy-900/15 bg-white px-4 py-3 text-center text-sm font-semibold text-navy-900 transition-colors hover:bg-navy-50 peer-checked:border-navy-900 peer-checked:bg-navy-900 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy-700">
               {option.label}
             </span>
           </label>

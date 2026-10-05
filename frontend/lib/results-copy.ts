@@ -1,0 +1,281 @@
+import { useT } from "@/lib/i18n";
+
+/*
+ * All text for the results dashboard and the exported report, in both languages.
+ * `en` must have exactly the same shape as `ar` (TypeScript checks this).
+ * Placeholders like {name} are filled in with fill().
+ */
+
+const ar = {
+  header: { area: "المساحة", date: "التاريخ", coordinates: "الإحداثيات" },
+  actions: {
+    save: "حفظ النتيجة",
+    saved: "محفوظة",
+    export: "تصدير التقرير",
+    exportWait: "التصدير متاح بعد تحميل المؤشرات",
+    rename: "إعادة تسمية",
+    newAnalysis: "تحليل جديد",
+  },
+  messages: {
+    saved: "تم حفظ النتيجة باسم «{name}».",
+    alreadySaved: "هذه النتيجة محفوظة مسبقًا، ولن تُحفظ مرتين.",
+  },
+  notFound: {
+    title: "لم نجد هذه النتيجة",
+    text: "ربما انتهت الجلسة. افتح السجل أو ابدأ تحليلًا جديدًا.",
+    history: "فتح السجل",
+  },
+  facade: {
+    label: "الواجهة",
+    names: { north: "شمال", east: "شرق", south: "جنوب", west: "غرب" },
+  },
+  map: {
+    title: "خريطة الواجهات",
+    label: "خريطة تعرض كل واجهة للشمس",
+    legendLow: "تعرض أقل للشمس",
+    legendHigh: "تعرض أعلى للشمس",
+    hint: "لون كل واجهة يوضح مقدار تعرضها للإشعاع الشمسي.",
+  },
+  indicators: {
+    titleSimple: "مؤشرات مبسّطة",
+    titleDetailed: "المؤشرات التفصيلية",
+    forFacade: "الواجهة {facade}",
+    metrics: {
+      radiation: "الإشعاع الشمسي",
+      shade: "الظل الطبيعي",
+      wind: "انفتاح الرياح",
+      sky: "كشف السماء",
+    },
+    levels: { low: "منخفض", medium: "متوسط", high: "مرتفع" },
+    loading: "جاري تحميل المؤشرات…",
+    errorTitle: "تعذر تحميل المؤشرات",
+    errorText: "باقي أجزاء اللوحة تعمل بشكل طبيعي. حاول مرة أخرى.",
+    retry: "إعادة المحاولة",
+    sample: "بيانات تجريبية",
+  },
+  site: {
+    title: "مؤشرات الموقع",
+    windSpeed: "سرعة الرياح",
+    windFrom: "اتجاه الرياح (قادمة من)",
+    temperature: "درجة الحرارة",
+    density: "الكثافة العمرانية",
+    avgHeight: "متوسط ارتفاع المباني المجاورة",
+    maxHeight: "أعلى مبنى مجاور",
+    noise: "مستوى الضوضاء",
+    densityLevels: { low: "منخفضة", medium: "متوسطة", high: "عالية" },
+  },
+  decisions: {
+    title: "القرارات التصميمية الموصى بها",
+    note: "كل التوصيات أدناه مرّت على محرك الفحص التنظيمي وتراعي كود البناء السعودي.",
+    ok: "ضمن الاشتراطات",
+    supporting: "المؤشرات الداعمة",
+    items: {
+      orientation: {
+        title: "اتجاه المبنى",
+        simple: "وجّه الجزء الأكبر من البيت نحو الشمال.",
+        detail:
+          "توجيه الكتلة الرئيسية نحو الشمال يقلل الإشعاع المباشر على الواجهات الأطول وقت الظهيرة، وهو الأنسب لمناخ الرياض الحار الجاف.",
+      },
+      windows: {
+        title: "تصميم النوافذ",
+        simple: "قلّل الزجاج في الجهة الغربية.",
+        detail:
+          "اجعل نسبة الزجاج إلى الجدار منخفضة في الواجهة الغربية، واستخدم زجاجًا مزدوجًا معزولًا حراريًا لتخفيف حرارة ما بعد الظهر.",
+      },
+      shading: {
+        title: "التظليل",
+        simple: "ضع كاسرات شمس على الجهة الجنوبية.",
+        detail:
+          "أضف كاسرات شمس أفقية على الواجهة الجنوبية بعمق يقارب 60 سم، لتحجب شمس الصيف العالية وتسمح بشمس الشتاء المنخفضة.",
+      },
+      garden: {
+        title: "موقع الحديقة",
+        simple: "ضع الفناء والحديقة في الجهة الشرقية.",
+        detail:
+          "المبنى يظلل الجهة الشرقية بعد الظهر، فتصلح لفناء مريح وحديقة أقل استهلاكًا للماء.",
+      },
+      setbacks: {
+        title: "الارتدادات النظامية",
+        simple: "التزم بالارتدادات النظامية للقطعة.",
+        detail:
+          "روعيت الارتدادات الدنيا في موقع الكتلة المقترح: شمال {north} م، جنوب {south} م، شرق وغرب {east} م.",
+      },
+    },
+  },
+  constraints: {
+    title: "الضوابط النظامية للقطعة",
+    text: "القيم المسموحة حسب كود البناء السعودي والتنظيم البلدي، وهي مدخلات استُخدمت في توليد التوصيات.",
+    maxCoverage: "أقصى نسبة تغطية",
+    maxHeight: "أقصى ارتفاع",
+    setback: "أدنى ارتداد {facade}",
+  },
+  parcelNote:
+    "ملاحظة على مستوى القطعة: مساحة هذه القطعة ({area} م²) قريبة من الحد الأدنى لتحقيق كامل الارتدادات مع مساحة بناء عملية. يُنصح بالتأكد من ذلك مع البلدية قبل بدء التصميم التفصيلي. لا علاقة لهذه الملاحظة بصحة التوصيات.",
+  disclaimer:
+    "معمار أداة دعم قرار مبكر، ولا تغني عن المعماري المرخّص ولا عن موافقات البلدية.",
+  exportModal: {
+    title: "تصدير التقرير",
+    language: "لغة التقرير",
+    intro: "يحتوي التقرير على القرارات التصميمية والمؤشرات.",
+    generate: "إنشاء التقرير",
+    working: "جاري إنشاء التقرير…",
+    ready: "التقرير جاهز.",
+    download: "تنزيل التقرير",
+    failed: "تعذر إنشاء التقرير. حاول مرة أخرى.",
+    retry: "إعادة المحاولة",
+    close: "إغلاق",
+    note: "التقرير ملف HTML قابل للطباعة. لحفظه كملف PDF اختر الطباعة من المتصفح ثم حفظ كـ PDF.",
+  },
+  report: {
+    title: "تقرير تحليل الموقع",
+    plot: "القطعة",
+    footer: "أُنشئ بواسطة منصة معمار.",
+  },
+  dev: { label: "عرض تجريبي لنوع الحساب (يظهر أثناء التطوير فقط)" },
+};
+
+export type ResultsCopy = typeof ar;
+
+const en: ResultsCopy = {
+  header: { area: "Area", date: "Date", coordinates: "Coordinates" },
+  actions: {
+    save: "Save result",
+    saved: "Saved",
+    export: "Export report",
+    exportWait: "Export is available once the indicators have loaded",
+    rename: "Rename",
+    newAnalysis: "New analysis",
+  },
+  messages: {
+    saved: "The result was saved as “{name}”.",
+    alreadySaved: "This result is already saved, so it will not be saved twice.",
+  },
+  notFound: {
+    title: "We could not find this result",
+    text: "Your session may have ended. Open your history or start a new analysis.",
+    history: "Open history",
+  },
+  facade: {
+    label: "Façade",
+    names: { north: "North", east: "East", south: "South", west: "West" },
+  },
+  map: {
+    title: "Façade map",
+    label: "Map of each façade's sun exposure",
+    legendLow: "Less sun exposure",
+    legendHigh: "More sun exposure",
+    hint: "The color of each façade shows how much solar radiation it receives.",
+  },
+  indicators: {
+    titleSimple: "Simple indicators",
+    titleDetailed: "Detailed indicators",
+    forFacade: "{facade} façade",
+    metrics: {
+      radiation: "Solar radiation",
+      shade: "Natural shade",
+      wind: "Wind openness",
+      sky: "Sky view",
+    },
+    levels: { low: "Low", medium: "Medium", high: "High" },
+    loading: "Loading indicators…",
+    errorTitle: "The indicators could not be loaded",
+    errorText: "The rest of the dashboard is working normally. Please try again.",
+    retry: "Try again",
+    sample: "Sample data",
+  },
+  site: {
+    title: "Site indicators",
+    windSpeed: "Wind speed",
+    windFrom: "Wind direction (coming from)",
+    temperature: "Temperature",
+    density: "Urban density",
+    avgHeight: "Average neighboring building height",
+    maxHeight: "Tallest neighboring building",
+    noise: "Noise level",
+    densityLevels: { low: "Low", medium: "Medium", high: "High" },
+  },
+  decisions: {
+    title: "Recommended design decisions",
+    note: "Every recommendation below passed the rule-based compliance check and respects the Saudi Building Code.",
+    ok: "Within requirements",
+    supporting: "Supporting indicators",
+    items: {
+      orientation: {
+        title: "Building orientation",
+        simple: "Face most of the house to the north.",
+        detail:
+          "Orienting the main mass to the north reduces direct radiation on the longer façades at midday, which suits Riyadh's hot-arid climate best.",
+      },
+      windows: {
+        title: "Window design",
+        simple: "Use less glass on the west side.",
+        detail:
+          "Keep the glazing-to-wall ratio low on the west façade and use insulated double glazing to soften the afternoon heat.",
+      },
+      shading: {
+        title: "Shading",
+        simple: "Add sun breakers on the south side.",
+        detail:
+          "Add horizontal sun breakers about 60 cm deep on the south façade to block the high summer sun and let the low winter sun in.",
+      },
+      garden: {
+        title: "Garden placement",
+        simple: "Put the courtyard and garden on the east side.",
+        detail:
+          "The building shades the east side in the afternoon, so it suits a comfortable courtyard and a garden that needs less water.",
+      },
+      setbacks: {
+        title: "Regulatory setbacks",
+        simple: "Follow the required setbacks for the plot.",
+        detail:
+          "The minimum setbacks are respected in the proposed building position: north {north} m, south {south} m, east and west {east} m.",
+      },
+    },
+  },
+  constraints: {
+    title: "Regulatory constraints for the plot",
+    text: "The values allowed by the Saudi Building Code and municipal rules. They were used as inputs when generating the recommendations.",
+    maxCoverage: "Maximum coverage",
+    maxHeight: "Maximum height",
+    setback: "Minimum {facade} setback",
+  },
+  parcelNote:
+    "Plot-level note: this plot's area ({area} m²) is close to the minimum needed to meet all setbacks with a practical building area. Check this with the municipality before detailed design. This note does not affect the validity of the recommendations.",
+  disclaimer:
+    "Mi'mar is an early decision-support tool. It does not replace a licensed architect or municipal approvals.",
+  exportModal: {
+    title: "Export report",
+    language: "Report language",
+    intro: "The report contains the design decisions and the indicators.",
+    generate: "Generate report",
+    working: "Generating the report…",
+    ready: "The report is ready.",
+    download: "Download report",
+    failed: "The report could not be generated. Please try again.",
+    retry: "Try again",
+    close: "Close",
+    note: "The report is a printable HTML file. To save it as a PDF, choose Print in your browser and then Save as PDF.",
+  },
+  report: {
+    title: "Site analysis report",
+    plot: "Plot",
+    footer: "Generated by the Mi'mar platform.",
+  },
+  dev: { label: "Account type preview (shown during development only)" },
+};
+
+export const resultsCopy = { ar, en };
+
+// Returns the results text in the current language.
+export function useResultsCopy(): ResultsCopy {
+  const { lang } = useT();
+  return resultsCopy[lang];
+}
+
+// Fills placeholders: fill("Hello {name}", { name: "Sara" }) -> "Hello Sara"
+export function fill(text: string, vars: Record<string, string | number>): string {
+  return Object.entries(vars).reduce(
+    (result, [key, value]) => result.split(`{${key}}`).join(String(value)),
+    text,
+  );
+}

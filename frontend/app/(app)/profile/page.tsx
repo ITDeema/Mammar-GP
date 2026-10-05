@@ -17,7 +17,7 @@ type Dialog = "logout" | "delete" | null;
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col gap-1">
-      <dt className="text-xs text-stone-600">{label}</dt>
+      <dt className="text-xs text-navy-900/70">{label}</dt>
       <dd className="text-sm font-semibold">{value}</dd>
     </div>
   );
@@ -51,7 +51,7 @@ export default function ProfilePage() {
       <div className="flex items-center gap-4">
         <div
           aria-hidden="true"
-          className="flex h-16 w-16 items-center justify-center rounded-pill border border-stone-200 bg-stone-100 text-2xl font-bold"
+          className="flex h-16 w-16 items-center justify-center rounded-pill border border-navy-900/15 bg-navy-50 text-2xl font-bold"
         >
           {mockUser.name.charAt(0)}
         </div>
@@ -105,7 +105,7 @@ export default function ProfilePage() {
         onClose={closeDialog}
         title={t("profile.logout")}
       >
-        <p className="text-sm text-stone-600">{t("profile.logoutBody")}</p>
+        <p className="text-sm text-navy-900/70">{t("profile.logoutBody")}</p>
         <div className="mt-6 flex gap-3">
           <Button onClick={logout}>{t("profile.logout")}</Button>
           <Button variant="secondary" onClick={closeDialog}>
@@ -119,7 +119,7 @@ export default function ProfilePage() {
         onClose={closeDialog}
         title={t("profile.delete")}
       >
-        <p className="text-sm text-stone-600">{t("profile.deleteWarning")}</p>
+        <p className="text-sm text-navy-900/70">{t("profile.deleteWarning")}</p>
         <div className="mt-4">
           <Input
             label={t("common.password")}
@@ -130,7 +130,7 @@ export default function ProfilePage() {
             value={deletePassword}
             onChange={(e) => setDeletePassword(e.target.value)}
           />
-          <p className="mt-2 text-xs text-stone-600">
+          <p className="mt-2 text-xs text-navy-900/70">
             {t("profile.deleteConfirm")}
           </p>
         </div>

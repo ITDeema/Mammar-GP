@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import BrandLogo from "@/components/BrandLogo";
 import { useT } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/i18n";
 import { mockUser } from "@/lib/user";
@@ -16,10 +17,11 @@ export default function AppHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-stone-200 bg-white">
+    <header className="border-b border-navy-900/15 bg-white">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        <Link href="/" className="font-heading text-lg font-bold">
-          {t("brand.name")}
+        <Link href="/select-plot" className="flex items-center gap-3">
+          <BrandLogo height={38} />
+          <span className="font-heading text-lg font-bold">{t("brand.name")}</span>
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-semibold">
@@ -30,7 +32,7 @@ export default function AppHeader() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`flex h-16 items-center border-b-2 ${active ? "border-dusk-500 text-stone-900" : "border-transparent text-stone-600 hover:text-stone-900"}`}
+                className={`flex h-16 items-center border-b-2 ${active ? "border-gold-500 text-navy-900" : "border-transparent text-navy-900/70 hover:text-navy-900"}`}
               >
                 {t(link.key)}
               </Link>
@@ -41,7 +43,7 @@ export default function AppHeader() {
         <Link
           href="/profile"
           aria-label={t("nav.profile")}
-          className={`flex h-8 w-8 items-center justify-center rounded-pill border bg-stone-100 text-sm font-bold ${pathname === "/profile" ? "border-dusk-500 ring-2 ring-dusk-500" : "border-stone-200"}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-pill border bg-navy-50 text-sm font-bold ${pathname === "/profile" ? "border-gold-500 ring-2 ring-gold-500" : "border-navy-900/15"}`}
         >
           {mockUser.name.charAt(0)}
         </Link>

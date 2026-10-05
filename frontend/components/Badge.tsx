@@ -4,9 +4,9 @@ type Tone = "success" | "caution" | "danger" | "neutral";
 
 const tones: Record<Tone, string> = {
   success: "bg-success-50 text-success-500",
-  caution: "bg-caution-50 text-caution-500",
+  caution: "bg-caution-50 text-caution-700",
   danger: "bg-danger-50 text-danger-500",
-  neutral: "bg-stone-100 text-stone-600",
+  neutral: "bg-navy-50 text-navy-900/70",
 };
 
 export default function Badge({

@@ -66,6 +66,40 @@ const ar = {
   "profile.deleteWarning":
     "سيتم حذف حسابك وجميع نتائجك المحفوظة وسجل تحليلاتك.",
   "profile.deleteConfirm": "أدخل كلمة المرور لتأكيد الحذف",
+
+  "common.save": "حفظ",
+  "common.rename": "إعادة تسمية",
+  "common.viewResults": "عرض النتائج",
+  "common.searchByName": "ابحث باسم النتيجة",
+  "common.noMatches": "لا توجد نتائج مطابقة للبحث",
+  "unit.sqm": "م²",
+
+  "forgot.title": "استعادة كلمة المرور",
+  "forgot.subtitle": "أدخل بريدك الإلكتروني وسنرسل لك رمز التحقق",
+  "forgot.submit": "إرسال الرمز",
+  "forgot.back": "العودة إلى تسجيل الدخول",
+
+  "rename.title": "إعادة تسمية النتيجة",
+  "rename.label": "اسم النتيجة",
+  "rename.errorRequired": "أدخل اسمًا للنتيجة",
+
+  "saved.title": "القطع المحفوظة",
+  "saved.subtitle": "النتائج التي حفظتها للرجوع لها لاحقًا",
+  "saved.empty": "لا توجد نتائج محفوظة بعد",
+  "saved.emptyHint": "احفظ نتيجة من لوحة النتائج لتظهر هنا",
+  "saved.remove": "إزالة من المحفوظات",
+  "saved.removeBody": "ستُزال «{name}» من المحفوظات، وتبقى في السجل.",
+  "saved.removeConfirm": "إزالة",
+
+  "history.title": "سجل التحليلات",
+  "history.subtitle": "جميع عمليات تحليل المواقع التي أجريتها",
+  "history.empty": "لا توجد تحليلات بعد",
+  "history.colDate": "التاريخ",
+  "history.colName": "الاسم",
+  "history.colArea": "المساحة",
+  "history.colNotes": "ملاحظات",
+  "history.colActions": "إجراءات",
+  "history.noteSetback": "القطعة قريبة من الحد الأدنى للارتدادات",
 };
 
 export type TranslationKey = keyof typeof ar;
@@ -117,6 +151,40 @@ const en: Record<TranslationKey, string> = {
   "profile.deleteWarning":
     "Your account, saved results and analysis history will be deleted.",
   "profile.deleteConfirm": "Enter your password to confirm deletion",
+
+  "common.save": "Save",
+  "common.rename": "Rename",
+  "common.viewResults": "View results",
+  "common.searchByName": "Search by result name",
+  "common.noMatches": "No results match your search",
+  "unit.sqm": "m²",
+
+  "forgot.title": "Reset your password",
+  "forgot.subtitle": "Enter your email and we'll send you a verification code",
+  "forgot.submit": "Send code",
+  "forgot.back": "Back to log in",
+
+  "rename.title": "Rename result",
+  "rename.label": "Result name",
+  "rename.errorRequired": "Enter a name for the result",
+
+  "saved.title": "Saved plots",
+  "saved.subtitle": "Results you saved to come back to later",
+  "saved.empty": "No saved results yet",
+  "saved.emptyHint": "Save a result from the results dashboard and it will appear here",
+  "saved.remove": "Remove from saved",
+  "saved.removeBody": "“{name}” will be removed from your saved list. It stays in your history.",
+  "saved.removeConfirm": "Remove",
+
+  "history.title": "Analysis history",
+  "history.subtitle": "All the site analyses you have run",
+  "history.empty": "No analyses yet",
+  "history.colDate": "Date",
+  "history.colName": "Name",
+  "history.colArea": "Area",
+  "history.colNotes": "Notes",
+  "history.colActions": "Actions",
+  "history.noteSetback": "Plot is close to the minimum setback limit",
 };
 
 const dictionaries: Record<Lang, Record<TranslationKey, string>> = { ar, en };
