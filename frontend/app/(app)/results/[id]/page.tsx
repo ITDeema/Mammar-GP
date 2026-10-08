@@ -59,9 +59,14 @@ function ResultsContent() {
   const { t, lang } = useT();
   const { id } = useParams<{ id: string }>();
   const params = useSearchParams();
-  const demo = params.get("demo"); // "indicators-error" or "export-error" (for testing)
-  const { results, setSaved, rename } = useResults();
+  const demo = params.get("demo"); // "indicators-error" or "export-error" (for testing) 
+  const { results, setSaved, rename, markOpened } = useResults();
   const result = results.find((r) => r.id === id);
+  
+  useEffect(() => {
+    markOpened(id);
+  }, [id, markOpened]);
+
 
   const [role, setRole] = useState<Role>(mockUser.role);
   const [facade, setFacade] = useState<Facade>("south");
