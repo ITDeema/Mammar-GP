@@ -34,6 +34,7 @@ const ar = {
   "nav.saved": "المحفوظات",
   "nav.history": "السجل",
   "nav.profile": "البروفايل",
+  "profile.myAccount": "حسابي",
 
   "home.title": "مرحبًا بعودتك إلى معمار",
   "home.subtitle": "ابدأ مشروعًا جديدًا أو تابع مشاريعك الأخيرة",
@@ -66,9 +67,22 @@ const ar = {
   "signup.toLogin": "تسجيل الدخول",
 
   "profile.accountInfo": "معلومات الحساب",
+  "profile.editAccount": "تعديل المعلومات",
   "profile.settings": "الإعدادات",
   "profile.language": "لغة المنصة",
   "profile.manage": "إدارة الحساب",
+  "profile.changePassword": "تغيير كلمة المرور",
+  "profile.validatePassword": "التحقق من البيانات",
+  
+  "profile.currentPassword": "كلمة المرور الحالية",
+  "profile.newPassword": "كلمة المرور الجديدة",
+  "profile.confirmPassword": "تأكيد كلمة المرور الجديدة",
+  
+  "profile.passwordFieldsRequired": "يرجى تعبئة جميع حقول كلمة المرور",
+  "profile.passwordMismatch": "كلمة المرور الجديدة وتأكيدها غير متطابقين",
+  "profile.passwordUnchanged": "يجب أن تختلف كلمة المرور الجديدة عن الحالية",
+
+
   "profile.logout": "تسجيل الخروج",
   "profile.logoutBody": "هل أنت متأكد من تسجيل الخروج؟",
   "profile.delete": "حذف الحساب",
@@ -128,6 +142,7 @@ const en: Record<TranslationKey, string> = {
   "nav.saved": "Saved",
   "nav.history": "History",
   "nav.profile": "Profile",
+  "profile.myAccount": "My Account",
 
   "home.title": "Welcome back to Maamar",
   "home.subtitle": "Start a new project or continue your recent projects",
@@ -160,9 +175,22 @@ const en: Record<TranslationKey, string> = {
   "signup.toLogin": "Log in",
 
   "profile.accountInfo": "Account information",
+  "profile.editAccount": "Edit information",
   "profile.settings": "Settings",
   "profile.language": "Platform language",
   "profile.manage": "Manage account",
+  "profile.changePassword": "Change password",
+  "profile.validatePassword": "Validate details",
+  
+  "profile.currentPassword": "Current password",
+  "profile.newPassword": "New password",
+  "profile.confirmPassword": "Confirm new password",
+  
+  "profile.passwordFieldsRequired": "Please fill in all password fields",
+  "profile.passwordMismatch": "New password and confirmation do not match",
+  "profile.passwordUnchanged": "The new password must be different from the current password",
+
+
   "profile.logout": "Log out",
   "profile.logoutBody": "Are you sure you want to log out?",
   "profile.delete": "Delete account",
