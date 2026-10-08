@@ -54,7 +54,11 @@ export default function SelectPlotPage() {
   const [point, setPoint] = useState<LatLng | null>(null);
   const [plot, setPlot] = useState<PlotInfo | null>(null);
   const [focus, setFocus] = useState<MapFocus | null>(null);
+  const [optionalArea, setOptionalArea] = useState("");
+  const [expectedHeight, setExpectedHeight] = useState("");
   const lookupId = useRef(0);
+  const [optionalError, setOptionalError] = useState("");
+
 
   function selectPoint(next: LatLng) {
     setPoint(next);
@@ -94,15 +98,43 @@ export default function SelectPlotPage() {
     selectPoint(result.point);
   }
 
+  
   function start() {
     if (!point || !plot) return;
+
+    const areaText = optionalArea.trim();
+    const heightText = expectedHeight.trim();
+
+    const validArea =
+      areaText === "" ||
+      (Number.isFinite(Number(areaText)) && Number(areaText) > 0);
+
+    const validHeight =
+      heightText === "" ||
+      (Number.isFinite(Number(heightText)) && Number(heightText) > 0);
+
+    
+    if (!validArea || !validHeight) {
+      setOptionalError(c.optionalInfoError);
+      return;
+    }
+
+
+    setOptionalError("");
+
     const query = new URLSearchParams({
       lat: String(point.lat),
       lng: String(point.lng),
-      area: String(plot.area),
+      area: String(areaText === "" ? plot.area : Number(areaText)),
     });
+
+    if (heightText !== "") {
+      query.set("height", String(Number(heightText)));
+    }
+
     router.push(`/analyzing?${query.toString()}`);
   }
+
 
   const selected = point
     ? { point, width: plot?.width ?? 20, depth: plot?.depth ?? 24 }
@@ -160,6 +192,44 @@ export default function SelectPlotPage() {
 
             {message && <StatusMessage tone={message.tone}>{message.text}</StatusMessage>}
           </Card>
+
+          
+          <Card className="flex flex-col gap-4">
+            <div>
+              <h2 className="text-sm font-bold">
+                {c.optionalInfoTitle}
+              </h2>
+              <p className="mt-1 text-xs leading-6 text-navy-900/70">
+                {c.optionalInfoHint}
+              </p>
+            </div>
+
+            <Input
+              label={c.optionalAreaLabel}
+              dir="ltr"
+              inputMode="decimal"
+              placeholder="450"
+              value={optionalArea}
+              onChange={(e) => setOptionalArea(e.target.value)}
+            />
+
+            <Input
+              label={c.expectedHeightLabel}
+              dir="ltr"
+              inputMode="decimal"
+              placeholder="12"
+              value={expectedHeight}
+              onChange={(e) => setExpectedHeight(e.target.value)}
+            />
+            
+            {optionalError && (
+              <StatusMessage tone="error">
+                {optionalError}
+              </StatusMessage>
+            )}
+
+          </Card>
+
 
           <Card>
             <div className="mb-3 flex items-center justify-between gap-2">

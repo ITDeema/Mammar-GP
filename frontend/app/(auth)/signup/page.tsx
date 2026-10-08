@@ -16,13 +16,13 @@ export default function SignupPage() {
   const { t } = useT();
   const router = useRouter();
   const [role, setRole] = useState<Role>("homeowner");
-  const [name, setName] = useState("");
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [accepted, setAccepted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const nameError = name.trim() === "" ? t("error.nameRequired") : undefined;
+  
   const emailError = isValidEmail(email) ? undefined : t("error.emailInvalid");
   const passwordError =
     password.length < MIN_PASSWORD_LENGTH
@@ -33,7 +33,7 @@ export default function SignupPage() {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setSubmitted(true);
-    if (nameError || emailError || passwordError || termsError) return;
+    if (emailError || passwordError || termsError) return;
 
     // TODO: call the sign-up API, then send the user to the OTP
     // verification screen once it exists. For now go to login.
@@ -60,14 +60,7 @@ export default function SignupPage() {
           ]}
         />
 
-        <Input
-          label={t("common.fullName")}
-          autoComplete="name"
-          placeholder={t("signup.fullNamePlaceholder")}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          error={submitted ? nameError : undefined}
-        />
+        
         <Input
           label={t("common.email")}
           type="email"

@@ -11,8 +11,9 @@ import SegmentedControl from "@/components/SegmentedControl";
 import { useT } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { mockUser } from "@/lib/user";
+import { isValidEmail, MIN_PASSWORD_LENGTH } from "@/lib/validation";
+type Dialog = "logout" | "delete" | "changePassword" | null;
 
-type Dialog = "logout" | "delete" | null;
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
@@ -28,11 +29,75 @@ export default function ProfilePage() {
   const router = useRouter();
   const [dialog, setDialog] = useState<Dialog>(null);
   const [deletePassword, setDeletePassword] = useState("");
+  
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  
+  const [passwordError, setPasswordError] = useState("");
+
+
+  
+  const [editingAccount, setEditingAccount] = useState(false);
+  
+  const [accountEmail, setAccountEmail] = useState(mockUser.email);
+  const [accountRole, setAccountRole] = useState(mockUser.role);
+  
+  const [draftEmail, setDraftEmail] = useState(mockUser.email);
+  const [draftRole, setDraftRole] = useState(mockUser.role);
+  const [emailError, setEmailError] = useState("");
+
+
+  function saveAccount() {
+    if (!isValidEmail(draftEmail.trim())) {
+      setEmailError(t("error.emailInvalid"));
+      return;
+    }
+
+    setAccountEmail(draftEmail.trim());
+    setAccountRole(draftRole);
+    setEmailError("");
+    setEditingAccount(false);
+  }
+
+
+
+  
+  function validatePasswordChange() {
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      setPasswordError(t("profile.passwordFieldsRequired"));
+      return;
+    }
+
+    if (newPassword.length < MIN_PASSWORD_LENGTH) {
+      setPasswordError(
+        t("error.passwordShort", { min: MIN_PASSWORD_LENGTH })
+      );
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setPasswordError(t("profile.passwordMismatch"));
+      return;
+    }
+
+    if (newPassword === currentPassword) {
+      setPasswordError(t("profile.passwordUnchanged"));
+      return;
+    }
+
+    setPasswordError("");
+  }
 
   function closeDialog() {
     setDialog(null);
     setDeletePassword("");
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setPasswordError("");
   }
+
 
   function logout() {
     // TODO: clear the session via the API.
@@ -48,28 +113,117 @@ export default function ProfilePage() {
 
   return (
     <main className="mx-auto flex max-w-2xl flex-col gap-4 px-6 py-8">
+      
       <div className="flex items-center gap-4">
         <div
           aria-hidden="true"
-          className="flex h-16 w-16 items-center justify-center rounded-pill border border-navy-900/15 bg-navy-50 text-2xl font-bold"
+          className="flex h-16 w-16 items-center justify-center rounded-pill border border-navy-900/15 bg-navy-50"
         >
-          {mockUser.name.charAt(0)}
+          <svg
+            className="h-9 w-9 text-navy-900"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21a8 8 0 0 1 16 0" />
+          </svg>
         </div>
+
         <div className="flex flex-col items-start gap-1">
-          <h1 className="font-heading text-xl font-bold">{mockUser.name}</h1>
+          <h1 className="font-heading text-xl font-bold">
+            {t("profile.myAccount")}
+          </h1>
           <Badge>{t(`role.${mockUser.role}`)}</Badge>
         </div>
       </div>
 
+
       <Card>
-        <h2 className="mb-4 text-sm font-bold">{t("profile.accountInfo")}</h2>
+        
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-sm font-bold">
+            {t("profile.accountInfo")}
+          </h2>
+
+          <Button
+            variant="secondary"
+            
+             onClick={() => {
+             setDraftEmail(accountEmail);
+             setDraftRole(accountRole);
+             setEditingAccount(true);
+            }}
+
+          >
+            {t("profile.editAccount")}
+          </Button>
+        </div>
+
         <dl className="flex flex-col gap-4">
-          <InfoRow label={t("common.fullName")} value={mockUser.name} />
-          <InfoRow label={t("common.email")} value={mockUser.email} />
-          <InfoRow
-            label={t("common.accountType")}
-            value={t(`role.${mockUser.role}`)}
-          />
+          
+          
+        {editingAccount ? (
+  <div className="flex flex-col gap-4">
+    <Input
+      label={t("common.email")}
+      type="email"
+      dir="ltr"
+      autoComplete="email"
+      value={draftEmail}
+      onChange={(e) => setDraftEmail(e.target.value)}
+      error={emailError || undefined}
+    />
+
+            <SegmentedControl
+              label={t("common.accountType")}
+              
+                value={draftRole}
+               onChange={setDraftRole}
+
+              
+              options={[
+                { value: "homeowner", label: t("role.homeowner") },
+                { value: "architect", label: t("role.architect") },
+              ]}
+            />
+
+            <div className="flex flex-wrap gap-3">
+              
+               <Button onClick={saveAccount}>
+               {t("common.save")}
+               </Button>
+
+              <Button
+                variant="secondary"
+                
+                onClick={() => {
+                setDraftEmail(accountEmail);
+                setDraftRole(accountRole);
+                setEditingAccount(false);
+             }}
+
+              >
+                {t("common.cancel")}
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <dl className="flex flex-col gap-4">
+            <InfoRow
+              label={t("common.email")}
+              value={accountEmail}
+            />
+            <InfoRow
+              label={t("common.accountType")}
+              value={t(`role.${accountRole}`)}
+            />
+          </dl>
+        )}
+
         </dl>
       </Card>
 
@@ -91,6 +245,14 @@ export default function ProfilePage() {
       <Card>
         <h2 className="mb-4 text-sm font-bold">{t("profile.manage")}</h2>
         <div className="flex flex-wrap gap-3">
+          
+<Button
+  variant="secondary"
+  onClick={() => setDialog("changePassword")}
+>
+  {t("profile.changePassword")}
+</Button>
+
           <Button variant="secondary" onClick={() => setDialog("logout")}>
             {t("profile.logout")}
           </Button>
@@ -99,6 +261,61 @@ export default function ProfilePage() {
           </Button>
         </div>
       </Card>
+      
+      <Modal
+        open={dialog === "changePassword"}
+        onClose={closeDialog}
+        title={t("profile.changePassword")}
+      >
+        <div className="flex flex-col gap-4">
+          <Input
+            label={t("profile.currentPassword")}
+            type="password"
+            dir="ltr"
+            autoComplete="current-password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+          />
+
+          <Input
+            label={t("profile.newPassword")}
+            type="password"
+            dir="ltr"
+            autoComplete="new-password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+
+          <Input
+            label={t("profile.confirmPassword")}
+            type="password"
+            dir="ltr"
+            autoComplete="new-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          
+          {passwordError && (
+            <p role="alert" className="text-sm text-danger-500">
+              {passwordError}
+            </p>
+          )}
+
+
+          <div className="mt-3 flex flex-wrap gap-3">
+            
+           <Button onClick={validatePasswordChange}>
+           {t("profile.validatePassword")}
+           </Button>
+
+
+            <Button variant="secondary" onClick={closeDialog}>
+              {t("common.cancel")}
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
 
       <Modal
         open={dialog === "logout"}
