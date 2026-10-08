@@ -303,7 +303,7 @@ function ResultsContent() {
         <IndicatorsPanel state={indicators} facade={facade} role={role} onRetry={retryIndicators} />
       </div>
 
-      <<div className="mt-5 grid gap-5 lg:grid-cols-[1.15fr_1fr]">
+      <div className="mt-5 grid gap-5 lg:grid-cols-[1.15fr_1fr]">
         <DecisionList role={role} indicators={ready} constraints={constraints} />
         <div className="flex flex-col gap-5">
           {architect && ready && <SiteIndicatorsCard site={ready.site} />}
