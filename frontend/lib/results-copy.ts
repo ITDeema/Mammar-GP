@@ -14,11 +14,14 @@ const ar = {
     export: "تصدير التقرير",
     exportWait: "التصدير متاح بعد تحميل المؤشرات",
     rename: "إعادة تسمية",
+    renameHint: "اضغط مرتين لتغيير الاسم",
+    home: "الرئيسية",
     newAnalysis: "تحليل جديد",
   },
   messages: {
     saved: "تم حفظ النتيجة باسم «{name}».",
     alreadySaved: "هذه النتيجة محفوظة مسبقًا، ولن تُحفظ مرتين.",
+    unsaved: "أُزيلت النتيجة من المحفوظات.",
   },
   notFound: {
     title: "لم نجد هذه النتيجة",
@@ -144,11 +147,14 @@ const en: ResultsCopy = {
     export: "Export report",
     exportWait: "Export is available once the indicators have loaded",
     rename: "Rename",
+    renameHint: "Double-click to rename",
+    home: "Home",
     newAnalysis: "New analysis",
   },
   messages: {
     saved: "The result was saved as “{name}”.",
     alreadySaved: "This result is already saved, so it will not be saved twice.",
+    unsaved: "The result was removed from saved.",
   },
   notFound: {
     title: "We could not find this result",
