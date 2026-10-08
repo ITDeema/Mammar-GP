@@ -27,7 +27,7 @@ export default function LoginPage() {
 
     // TODO: call the login API here. Until it exists, any valid-looking
     // input passes. Also change the destination to the plot-selection page.
-    router.push("/select-plot");
+    router.push("/home");
   }
 
   return (

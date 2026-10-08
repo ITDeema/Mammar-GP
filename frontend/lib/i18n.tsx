@@ -35,6 +35,15 @@ const ar = {
   "nav.history": "السجل",
   "nav.profile": "البروفايل",
 
+  "home.title": "مرحبًا بعودتك إلى معمار",
+  "home.subtitle": "ابدأ مشروعًا جديدًا أو تابع مشاريعك الأخيرة",
+  "home.recent": "المشاريع الأخيرة",
+  "home.newProject": "مشروع جديد",
+  "home.newProjectHint": "ابدأ بتحليل قطعة أرض جديدة",
+  "home.viewAll": "عرض جميع المشاريع",
+  "home.empty": "لا توجد مشاريع سابقة حتى الآن",
+  "home.emptyHint": "ابدأ مشروعك الأول لتظهر نتائجه هنا",
+
   "error.nameRequired": "أدخل الاسم الكامل",
   "error.emailInvalid": "أدخل بريدًا إلكترونيًا صحيحًا",
   "error.passwordRequired": "أدخل كلمة المرور",
@@ -119,6 +128,15 @@ const en: Record<TranslationKey, string> = {
   "nav.saved": "Saved",
   "nav.history": "History",
   "nav.profile": "Profile",
+
+  "home.title": "Welcome back to Maamar",
+  "home.subtitle": "Start a new project or continue your recent projects",
+  "home.recent": "Recent projects",
+  "home.newProject": "New Project",
+  "home.newProjectHint": "Start analyzing a new plot",
+  "home.viewAll": "View all projects",
+  "home.empty": "No previous projects yet",
+  "home.emptyHint": "Start your first project to see its results here",
 
   "error.nameRequired": "Enter your full name",
   "error.emailInvalid": "Enter a valid email address",

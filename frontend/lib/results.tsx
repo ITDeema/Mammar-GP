@@ -19,6 +19,7 @@ export type AnalysisResult = {
   date: string; // ISO date of the analysis
   saved: boolean;
   parcelNote: boolean; // true when the plot itself is near a regulatory limit
+  lastOpenedAt?: string;
 };
 
 // TEMPORARY sample data until the API exists.
@@ -39,6 +40,7 @@ type ResultsContextValue = {
   results: AnalysisResult[];
   rename: (id: string, name: string) => void;
   setSaved: (id: string, saved: boolean) => void;
+  markOpened: (id: string) => void;
   addResult: (input: NewResult) => string; // returns the new result's id
 };
 
@@ -55,6 +57,18 @@ export function ResultsProvider({ children }: { children: ReactNode }) {
   const setSaved = useCallback((id: string, saved: boolean) => {
     setResults((prev) => prev.map((r) => (r.id === id ? { ...r, saved } : r)));
   }, []);
+
+  
+  const markOpened = useCallback((id: string) => {
+    setResults((prev) =>
+      prev.map((r) =>
+        r.id === id
+          ? { ...r, lastOpenedAt: new Date().toISOString() }
+          : r
+      )
+    );
+  }, []);
+
 
   // A finished analysis goes into the history automatically (it is not "saved" yet).
   const addResult = useCallback((input: NewResult) => {
@@ -74,10 +88,12 @@ export function ResultsProvider({ children }: { children: ReactNode }) {
     return id;
   }, []);
 
+  
   const value = useMemo(
-    () => ({ results, rename, setSaved, addResult }),
-    [results, rename, setSaved, addResult],
+    () => ({ results, rename, setSaved, addResult, markOpened }),
+    [results, rename, setSaved, addResult, markOpened],
   );
+
 
   return (
     <ResultsContext.Provider value={value}>{children}</ResultsContext.Provider>
