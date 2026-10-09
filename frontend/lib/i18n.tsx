@@ -24,6 +24,7 @@ const ar = {
 
   "common.email": "البريد الإلكتروني",
   "common.password": "كلمة المرور",
+  "common.confirmPassword": "تأكيد كلمة المرور",
   "common.fullName": "الاسم الكامل",
   "common.accountType": "نوع الحساب",
   "common.cancel": "إلغاء",
@@ -49,6 +50,7 @@ const ar = {
   "error.emailInvalid": "أدخل بريدًا إلكترونيًا صحيحًا",
   "error.passwordRequired": "أدخل كلمة المرور",
   "error.passwordShort": "كلمة المرور يجب ألا تقل عن {min} أحرف",
+  "error.passwordMismatch": "كلمتا المرور غير متطابقتين",
   "error.termsRequired": "يجب الموافقة على الشروط والأحكام",
 
   "login.title": "تسجيل الدخول",
@@ -132,6 +134,7 @@ const en: Record<TranslationKey, string> = {
 
   "common.email": "Email",
   "common.password": "Password",
+  "common.confirmPassword": "Confirm password",
   "common.fullName": "Full name",
   "common.accountType": "Account type",
   "common.cancel": "Cancel",
@@ -157,6 +160,7 @@ const en: Record<TranslationKey, string> = {
   "error.emailInvalid": "Enter a valid email address",
   "error.passwordRequired": "Enter your password",
   "error.passwordShort": "Password must be at least {min} characters",
+  "error.passwordMismatch": "Passwords do not match",
   "error.termsRequired": "You must accept the terms and conditions",
 
   "login.title": "Log in",
