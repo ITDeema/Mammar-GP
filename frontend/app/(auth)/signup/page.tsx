@@ -19,6 +19,7 @@ export default function SignupPage() {
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [accepted, setAccepted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -28,12 +29,15 @@ export default function SignupPage() {
     password.length < MIN_PASSWORD_LENGTH
       ? t("error.passwordShort", { min: MIN_PASSWORD_LENGTH })
       : undefined;
+  const confirmPasswordError =
+    confirmPassword !== password ? t("error.passwordMismatch") : undefined;
   const termsError = accepted ? undefined : t("error.termsRequired");
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setSubmitted(true);
-    if (emailError || passwordError || termsError) return;
+    if (emailError || passwordError || confirmPasswordError || termsError)
+    return;
 
     // TODO: call the sign-up API, then send the user to the OTP
     // verification screen once it exists. For now go to login.
@@ -79,6 +83,15 @@ export default function SignupPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           error={submitted ? passwordError : undefined}
+        />
+          <Input
+          label={t("common.confirmPassword")}
+          type="password"
+          dir="ltr"
+          autoComplete="new-password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          error={submitted ? confirmPasswordError : undefined}
         />
 
         <div className="flex flex-col gap-2">
