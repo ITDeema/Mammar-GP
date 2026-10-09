@@ -270,7 +270,13 @@ export default function SelectPlotPage() {
         </div>
 
         <div className="relative isolate z-0 h-[60vh] min-h-[420px] overflow-hidden rounded-card border border-navy-900/15 lg:h-[calc(100vh-190px)] lg:min-h-[520px]">
-          <PlotPickerMap selected={selected} focus={focus} onPick={handlePick} label={c.mapLabel} />
+          <PlotPickerMap
+            selected={selected}
+            focus={focus}
+            onPick={handlePick}
+            label={c.mapLabel}
+            layerLabels={{ street: c.layerStreet, satellite: c.layerSatellite }}
+          />
         </div>
       </div>
     </main>
