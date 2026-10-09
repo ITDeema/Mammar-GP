@@ -93,21 +93,35 @@ export default function SignupPage() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           error={submitted ? confirmPasswordError : undefined}
         />
+        
+<div className="flex flex-col gap-2">
+  <div className="flex items-center gap-2 text-sm text-navy-900/70">
+    <input
+      id="accept-terms"
+      type="checkbox"
+      checked={accepted}
+      onChange={(e) => setAccepted(e.target.checked)}
+      className="h-4 w-4 accent-navy-900"
+    />
 
-        <div className="flex flex-col gap-2">
-          <label className="flex items-center gap-2 text-sm text-navy-900/70">
-            <input
-              type="checkbox"
-              checked={accepted}
-              onChange={(e) => setAccepted(e.target.checked)}
-              className="h-4 w-4 accent-navy-900"
-            />
-            {t("signup.terms")}
-          </label>
-          {submitted && termsError && (
-            <p className="text-xs text-danger-500">{termsError}</p>
-          )}
-        </div>
+    <label htmlFor="accept-terms">
+      <span>{t("signup.agreePrefix")} </span>
+      <Link
+        href="/privacy-policy"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-semibold text-gold-700 underline hover:text-gold-800"
+      >
+        {t("signup.termsLink")}
+      </Link>
+    </label>
+  </div>
+
+  {submitted && termsError && (
+    <p className="text-xs text-danger-500">{termsError}</p>
+  )}
+</div>
+
 
         <Button type="submit" fullWidth>
           {t("signup.submit")}
