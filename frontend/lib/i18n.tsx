@@ -67,6 +67,8 @@ const ar = {
   "signup.submit": "إنشاء حساب",
   "signup.haveAccount": "لديك حساب مسبقًا؟",
   "signup.toLogin": "تسجيل الدخول",
+  "signup.agreePrefix": "أوافق على",
+  "signup.termsLink": "الشروط والأحكام وسياسة الخصوصية",
 
   "profile.accountInfo": "معلومات الحساب",
   "profile.editAccount": "تعديل المعلومات",
@@ -177,6 +179,8 @@ const en: Record<TranslationKey, string> = {
   "signup.submit": "Sign up",
   "signup.haveAccount": "Already have an account?",
   "signup.toLogin": "Log in",
+  "signup.agreePrefix": "I agree to the",
+  "signup.termsLink": "Terms & Conditions and Privacy Policy",
 
   "profile.accountInfo": "Account information",
   "profile.editAccount": "Edit information",

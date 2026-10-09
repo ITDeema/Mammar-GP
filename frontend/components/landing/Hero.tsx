@@ -34,19 +34,10 @@ export default function Hero() {
 
       <div className="mx-auto grid min-h-[100svh] max-w-7xl items-center gap-14 px-6 pb-28 pt-28 lg:grid-cols-[1.05fr_1fr] lg:gap-8">
         <div>
-          <p
-            className="lp-rise inline-flex items-center gap-2.5 rounded-pill border border-gold-400/40 bg-gold-500/10 px-4 py-2 text-sm text-gold-300"
-            style={delay(0)}
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="lp-ripple absolute inset-0 rounded-pill bg-gold-400" />
-              <span className="relative h-2 w-2 rounded-pill bg-gold-400" />
-            </span>
-            {c.eyebrow}
-          </p>
+          
 
           <h1
-            className="lp-rise mt-7 font-heading text-[2.5rem] font-bold leading-[1.3] sm:text-6xl lg:text-[4.2rem]"
+            className="lp-rise font-heading text-[2.5rem] font-bold leading-[1.3] sm:text-6xl lg:text-[4.2rem]"
             style={delay(120)}
           >
             {c.titleBefore} <span className="lp-underline">{c.titleHighlight}</span>{" "}
