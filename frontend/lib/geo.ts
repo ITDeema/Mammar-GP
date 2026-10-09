@@ -44,16 +44,46 @@ export function parseCoordinates(latText: string, lngText: string): CoordinatesR
   return { ok: true, point };
 }
 
+// Turns the rotation text typed by the user into degrees (0 to 359).
+// Empty text means 0. Returns null when the text is not a number.
+export function parseRotation(text: string): number | null {
+  const clean = normalize(text);
+  if (clean === "") return 0;
+  const value = Number(clean);
+  if (!Number.isFinite(value)) return null;
+  return ((value % 360) + 360) % 360;
+}
+
 // The four corners of a plot (in meters) around its center point.
-export function plotPolygon(center: LatLng, width: number, depth: number): LatLng[] {
-  const dLat = depth / 2 / 111_320;
-  const dLng = width / 2 / (111_320 * Math.cos((center.lat * Math.PI) / 180));
-  return [
-    { lat: center.lat + dLat, lng: center.lng - dLng },
-    { lat: center.lat + dLat, lng: center.lng + dLng },
-    { lat: center.lat - dLat, lng: center.lng + dLng },
-    { lat: center.lat - dLat, lng: center.lng - dLng },
+// rotation is in degrees, clockwise from north (0 = the plot faces north).
+// Corners are returned in this order: north-west, north-east, south-east, south-west.
+export function plotPolygon(
+  center: LatLng,
+  width: number,
+  depth: number,
+  rotation = 0,
+): LatLng[] {
+  const theta = (rotation * Math.PI) / 180;
+  const cos = Math.cos(theta);
+  const sin = Math.sin(theta);
+  const metersPerLat = 111_320;
+  const metersPerLng = 111_320 * Math.cos((center.lat * Math.PI) / 180);
+  const hw = width / 2;
+  const hd = depth / 2;
+  const corners: [number, number][] = [
+    [-hw, hd],
+    [hw, hd],
+    [hw, -hd],
+    [-hw, -hd],
   ];
+  return corners.map(([x, y]) => {
+    const east = x * cos + y * sin;
+    const north = -x * sin + y * cos;
+    return {
+      lat: center.lat + north / metersPerLat,
+      lng: center.lng + east / metersPerLng,
+    };
+  });
 }
 
 export function formatCoordinates(point: LatLng): string {
