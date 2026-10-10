@@ -53,6 +53,11 @@ const ResultMap = dynamic(() => import("@/components/map/ResultMap"), {
   loading: () => <MapLoading />,
 });
 
+// The diagrams need the browser (maps), so they are loaded only on the client.
+const SiteDiagrams = dynamic(() => import("@/components/analysis/SiteDiagrams"), {
+  ssr: false,
+});
+
 const linkButton =
   "rounded-control border border-navy-900/15 bg-white px-5 py-3 text-sm font-semibold text-navy-900 transition-colors hover:bg-navy-50";
 
@@ -270,6 +275,12 @@ function ResultsContent() {
         <p className="mt-4 rounded-card border border-caution-500/40 bg-caution-50 p-4 text-sm leading-7 text-caution-700">
           {fill(c.parcelNote, { area: result.area })}
         </p>
+      )}
+
+      {architect && (
+        <div className="mt-6">
+          <SiteDiagrams lat={lat} lng={lng} />
+        </div>
       )}
       
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_1fr]">
