@@ -5,8 +5,16 @@ import type { Facade, SiteIndicators } from "@/lib/analysis-detail";
 import { fill, useResultsCopy } from "@/lib/results-copy";
 
 // Where each side of the compass points, clockwise from north.
-const BEARING: Record<Facade, number> = { north: 0, east: 90, south: 180, west: 270 };
-
+const BEARING: Record<Facade, number> = {
+  north: 0,
+  northeast: 45,
+  east: 90,
+  southeast: 135,
+  south: 180,
+  southwest: 225,
+  west: 270,
+  northwest: 315,
+};
 // A small compass. The arrow points the way the wind blows, so it starts
 // on the side the wind comes from. Shown to everyone.
 export default function WindCard({ site }: { site: SiteIndicators }) {
