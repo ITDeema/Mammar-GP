@@ -30,7 +30,16 @@ const ar = {
   },
   facade: {
     label: "الواجهة",
-    names: { north: "شمال", east: "شرق", south: "جنوب", west: "غرب" },
+      names: {
+      north: "شمال",
+      northeast: "شمال شرق",
+      east: "شرق",
+      southeast: "جنوب شرق",
+      south: "جنوب",
+      southwest: "جنوب غرب",
+      west: "غرب",
+      northwest: "شمال غرب",
+    },
   },
   map: {
     title: "خريطة الواجهات",
@@ -189,7 +198,16 @@ const en: ResultsCopy = {
   },
   facade: {
     label: "Façade",
-    names: { north: "North", east: "East", south: "South", west: "West" },
+      names: {
+      north: "North",
+      northeast: "Northeast",
+      east: "East",
+      southeast: "Southeast",
+      south: "South",
+      southwest: "Southwest",
+      west: "West",
+      northwest: "Northwest",
+    },
   },
   map: {
     title: "Façade map",
