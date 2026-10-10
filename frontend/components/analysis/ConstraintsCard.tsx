@@ -1,7 +1,7 @@
 "use client";
 
 import Card from "@/components/Card";
-import { FACADES } from "@/lib/analysis-detail";
+import { SIDES } from "@/lib/analysis-detail";
 import type { Constraints } from "@/lib/analysis-detail";
 import { fill, useResultsCopy } from "@/lib/results-copy";
 
@@ -11,7 +11,7 @@ export default function ConstraintsCard({ constraints }: { constraints: Constrai
   const rows = [
     { label: c.constraints.maxCoverage, value: `${constraints.maxCoverage}%` },
     { label: c.constraints.maxHeight, value: `≈${constraints.maxHeight} m` },
-    ...FACADES.map((facade) => ({
+    ...SIDES.map((facade) => ({
       label: fill(c.constraints.setback, { facade: c.facade.names[facade] }),
       value: `${constraints.setbacks[facade]} m`,
     })),
