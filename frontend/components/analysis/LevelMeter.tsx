@@ -1,12 +1,7 @@
 import type { Level, Tone } from "@/lib/analysis-detail";
+import { TONE_FILL } from "@/lib/tone-styles";
 
 const STEPS: Level[] = ["low", "medium", "high"];
-
-const FILLED: Record<Tone, string> = {
-  success: "bg-success-500",
-  caution: "bg-caution-500",
-  neutral: "bg-navy-700",
-};
 
 // Three segments: one filled for low, two for medium, three for high.
 export default function LevelMeter({
@@ -24,7 +19,7 @@ export default function LevelMeter({
       {STEPS.map((step, index) => (
         <span
           key={step}
-          className={`h-1.5 flex-1 rounded-pill ${index < filled ? FILLED[tone] : "bg-navy-900/10"}`}
+          className={`h-1.5 flex-1 rounded-pill ${index < filled ? TONE_FILL[tone] : "bg-navy-900/10"}`}
         />
       ))}
     </div>
