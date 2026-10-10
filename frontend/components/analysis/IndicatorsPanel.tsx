@@ -18,7 +18,6 @@ import { USE_MOCK_DATA } from "@/lib/analysis";
 import { fill, useResultsCopy } from "@/lib/results-copy";
 import { TONE_FILL } from "@/lib/tone-styles";
 import type { Role } from "@/lib/user";
-import { TONE_FILL } from "@/lib/tone-styles";
 
 export type IndicatorsState =
   | { status: "loading" }
