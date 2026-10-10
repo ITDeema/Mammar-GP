@@ -173,13 +173,16 @@ export function levelOf(metric: MetricKey, value: number): Level {
   return value < medium ? "low" : value < high ? "medium" : "high";
 }
 
-export type Tone = "success" | "caution" | "neutral";
+export type Tone = "success" | "caution" | "danger" | "neutral";
 
-// High sun exposure is a warning; high shade and wind openness are good.
+// Green = good, yellow = in between, red = bad.
+// High sun exposure is bad; high shade and wind openness are good.
+// Sky view has no good or bad side, so it stays neutral.
 export function toneOf(metric: MetricKey, level: Level): Tone {
-  if (metric === "sky" || level === "medium") return "neutral";
-  if (metric === "radiation") return level === "high" ? "caution" : "success";
-  return level === "high" ? "success" : "caution";
+  if (metric === "sky") return "neutral";
+  if (level === "medium") return "caution";
+  const good: Level = metric === "radiation" ? "low" : "high";
+  return level === good ? "success" : "danger";
 }
 
 export const METRIC_UNITS: Record<MetricKey, string> = {
