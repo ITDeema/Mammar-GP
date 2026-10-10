@@ -14,6 +14,7 @@ import ExportModal from "@/components/analysis/ExportModal";
 import IndicatorsPanel, { SiteIndicatorsCard } from "@/components/analysis/IndicatorsPanel";
 import type { IndicatorsState } from "@/components/analysis/IndicatorsPanel";
 import StatusMessage from "@/components/analysis/StatusMessage";
+import SummaryTiles from "@/components/analysis/SummaryTiles";
 import { usePlotCopy } from "@/components/analysis/usePlotCopy";
 import {
   FACADES,
@@ -268,6 +269,10 @@ function ResultsContent() {
         </p>
       )}
 
+      <div className="mt-6">
+        <SummaryTiles state={indicators} role={role} />
+      </div>
+      
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_1fr]">
         <Card className="flex flex-col gap-4">
           <div>
