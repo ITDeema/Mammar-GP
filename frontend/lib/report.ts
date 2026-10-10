@@ -1,4 +1,4 @@
-import { DECISIONS, FACADES, METRICS, formatMetric, levelOf } from "@/lib/analysis-detail";
+import { DECISIONS, FACADES, METRICS, SIDES,formatMetric, levelOf } from "@/lib/analysis-detail";
 import type { Constraints, IndicatorsData } from "@/lib/analysis-detail";
 import { formatDate } from "@/lib/format";
 import type { Lang } from "@/lib/i18n";
@@ -53,7 +53,7 @@ export function buildReportHtml(input: ReportInput): string {
     return `<tr><th>${escapeHtml(c.facade.names[facade])}</th>${cells}</tr>`;
   }).join("");
 
-  const setbackRows = FACADES.map(
+  const setbackRows = SIDES.map(
     (facade) =>
       `<li>${escapeHtml(fill(c.constraints.setback, { facade: c.facade.names[facade] }))}: ${input.constraints.setbacks[facade]} m</li>`,
   ).join("");
