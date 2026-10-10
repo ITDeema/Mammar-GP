@@ -54,6 +54,22 @@ const MOCK_NEIGHBOURS: Record<Facade, Neighbour[]> = {
     { kind: "land", height: null, distance: 6 },
     { kind: "building", height: 12.5, distance: 2 },
   ],
+  northeast: [
+    { kind: "street", height: null, distance: 18 },
+    { kind: "building", height: 12.5, distance: 3 },
+  ],
+  southeast: [
+    { kind: "street", height: null, distance: 16 },
+    { kind: "villa", height: 9, distance: 2.5 },
+  ],
+  southwest: [
+    { kind: "street", height: null, distance: 17 },
+    { kind: "land", height: null, distance: 8 },
+  ],
+  northwest: [
+    { kind: "villa", height: 9, distance: 2 },
+    { kind: "building", height: 12.5, distance: 3 },
+  ],
 };
 
 export function neighboursFor(facade: Facade): Neighbour[] {
