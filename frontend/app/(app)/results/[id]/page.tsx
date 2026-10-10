@@ -15,6 +15,8 @@ import IndicatorsPanel, { SiteIndicatorsCard } from "@/components/analysis/Indic
 import type { IndicatorsState } from "@/components/analysis/IndicatorsPanel";
 import StatusMessage from "@/components/analysis/StatusMessage";
 import WindCard from "@/components/analysis/WindCard";
+import NeighbourhoodCard from "@/components/analysis/NeighbourhoodCard";
+import NeighboursCard from "@/components/analysis/NeighboursCard";
 import { usePlotCopy } from "@/components/analysis/usePlotCopy";
 import {
   FACADES,
@@ -270,6 +272,7 @@ function ResultsContent() {
       )}
       
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_1fr]">
+      <div className="flex flex-col gap-5">
         <Card className="flex flex-col gap-4">
           <div>
             <h2 className="text-sm font-bold">{c.map.title}</h2>
@@ -304,18 +307,26 @@ function ResultsContent() {
             onChange={setFacade}
             options={FACADES.map((f) => ({ value: f, label: c.facade.names[f] }))}
           />
-        </Card>
+          </Card>
+          {ready && <WindCard site={ready.site} />}
+          {architect && ready && <SiteIndicatorsCard site={ready.site} />}
+        </div>
 
-        <IndicatorsPanel state={indicators} facade={facade} role={role} onRetry={retryIndicators} />
+        <div className="flex flex-col gap-5">
+          <IndicatorsPanel state={indicators} facade={facade} role={role} onRetry={retryIndicators} />
+          {architect && ready && <NeighboursCard facade={facade} />}
+        </div>
       </div>
+
+      {!architect && ready && (
+        <div className="mt-5">
+          <NeighbourhoodCard site={ready.site} />
+        </div>
+      )}
 
       <div className="mt-5 grid gap-5 lg:grid-cols-[1.15fr_1fr]">
         <DecisionList role={role} indicators={ready} constraints={constraints} />
-        <div className="flex flex-col gap-5">
-          {ready && <WindCard site={ready.site} />}
-          {architect && ready && <SiteIndicatorsCard site={ready.site} />}
-          <ConstraintsCard constraints={constraints} />
-        </div>
+        <ConstraintsCard constraints={constraints} />
       </div>
 
       <p className="mt-8 text-xs leading-6 text-navy-900/70">{c.disclaimer}</p>
