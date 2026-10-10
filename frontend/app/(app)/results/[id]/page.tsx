@@ -308,13 +308,13 @@ function ResultsContent() {
             options={FACADES.map((f) => ({ value: f, label: c.facade.names[f] }))}
           />
           </Card>
-          {ready && <WindCard site={ready.site} />}
           {architect && ready && <SiteIndicatorsCard site={ready.site} />}
         </div>
 
         <div className="flex flex-col gap-5">
           <IndicatorsPanel state={indicators} facade={facade} role={role} onRetry={retryIndicators} />
           {architect && ready && <NeighboursCard facade={facade} />}
+          {ready && <WindCard site={ready.site} />}
         </div>
       </div>
 
