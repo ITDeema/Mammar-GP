@@ -34,10 +34,10 @@ export default function WindCard({ site }: { site: SiteIndicators }) {
           <text x={70} y={133} textAnchor="middle" className={labelClass("south")}>
             {c.facade.names.south}
           </text>
-          <text x={2} y={74} textAnchor="start" className={labelClass("west")}>
+          <text x={14} y={74} textAnchor="middle" className={labelClass("west")}>
             {c.facade.names.west}
           </text>
-          <text x={138} y={74} textAnchor="end" className={labelClass("east")}>
+          <text x={126} y={74} textAnchor="middle" className={labelClass("east")}>
             {c.facade.names.east}
           </text>
           <g transform={`rotate(${angle} 70 70)`}>
