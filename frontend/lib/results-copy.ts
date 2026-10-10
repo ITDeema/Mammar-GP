@@ -123,6 +123,21 @@ const ar = {
     hint: "السهم يشير إلى الاتجاه الذي تهب نحوه الرياح.",
     diagram: "بوصلة تعرض اتجاه الرياح السائدة",
   },
+
+    hood: {
+    title: "معلومات الحي",
+    services: "أقرب الخدمات",
+    gaugeLabel: "{metric}: {level}",
+    kinds: { mosque: "مسجد", school: "مدرسة", pharmacy: "صيدلية", market: "سوق" },
+  },
+  neighbours: {
+    title: "المجاورون",
+    hint: "المجاورون على الواجهة {facade}. يظهر فقط ما هو موجود.",
+    empty: "لا توجد مبانٍ أو شوارع مجاورة على هذه الواجهة.",
+    cols: { kind: "المجاور", height: "الارتفاع", distance: "المسافة" },
+    kinds: { street: "شارع", villa: "فيلا", building: "عمارة", land: "أرض فضاء" },
+  },
+  
   parcelNote:
     "ملاحظة على مستوى القطعة: مساحة هذه القطعة ({area} م²) قريبة من الحد الأدنى لتحقيق كامل الارتدادات مع مساحة بناء عملية. يُنصح بالتأكد من ذلك مع البلدية قبل بدء التصميم التفصيلي. لا علاقة لهذه الملاحظة بصحة التوصيات.",
   disclaimer:
@@ -266,6 +281,20 @@ const en: ResultsCopy = {
     from: "Wind from the {facade}",
     hint: "The arrow points the way the wind blows.",
     diagram: "Compass showing the prevailing wind direction",
+  },
+
+    hood: {
+    title: "Neighborhood info",
+    services: "Nearest services",
+    gaugeLabel: "{metric}: {level}",
+    kinds: { mosque: "Mosque", school: "School", pharmacy: "Pharmacy", market: "Market" },
+  },
+  neighbours: {
+    title: "Neighbors",
+    hint: "Neighbors on the {facade} façade. Only what exists is shown.",
+    empty: "No neighboring buildings or streets on this façade.",
+    cols: { kind: "Neighbor", height: "Height", distance: "Distance" },
+    kinds: { street: "Street", villa: "Villa", building: "Building", land: "Empty land" },
   },
   
   parcelNote:
