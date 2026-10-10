@@ -205,32 +205,3 @@ export function metricFraction(metric: MetricKey, value: number): number {
   return clamp01(metric === "radiation" ? value / MAX_RADIATION : value);
 }
 
-/* ---------- summary tiles ---------- */
-
-export type SummaryKey = "radiation" | "shade" | "wind" | "noise";
-export type SummaryItem = { key: SummaryKey; value: number; level: Level; tone: Tone };
-
-// Noise (dB) levels. These thresholds are a first guess, adjust them with the team.
-export function noiseLevel(db: number): Level {
-  return db < 50 ? "low" : db < 60 ? "medium" : "high";
-}
-
-// One value per tile: the average of the four façades, plus the site noise.
-export function buildSummary(data: IndicatorsData): SummaryItem[] {
-  const average = (metric: MetricKey) =>
-    FACADES.reduce((sum, facade) => sum + data.facades[facade][metric], 0) / FACADES.length;
-  const keys: MetricKey[] = ["radiation", "shade", "wind"];
-  const items: SummaryItem[] = keys.map((key) => {
-    const value = average(key);
-    const level = levelOf(key, value);
-    return { key: key as SummaryKey, value, level, tone: toneOf(key, level) };
-  });
-  const level = noiseLevel(data.site.noise);
-  items.push({
-    key: "noise",
-    value: data.site.noise,
-    level,
-    tone: level === "high" ? "caution" : level === "low" ? "success" : "neutral",
-  });
-  return items;
-}
