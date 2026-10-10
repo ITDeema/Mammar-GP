@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { FACADES, heatColor } from "@/lib/analysis-detail";
-import type { Facade } from "@/lib/analysis-detail";
+import { FACADES, heatColor, isSide } from "@/lib/analysis-detail";
+import type { Facade, Side } from "@/lib/analysis-detail";
 import type { LatLng } from "@/lib/geo";
 
 type ResultMapProps = {
@@ -12,14 +12,23 @@ type ResultMapProps = {
   lng: number;
   width: number; // plot width in meters
   depth: number; // plot depth in meters
-  setbacks: Record<Facade, number>;
+  setbacks: Record<Side, number>;
   heat: Record<Facade, number> | null; // 0..1 per façade, or null while unknown
   selected: Facade;
   tips: Record<Facade, string>; // hover text per façade
   label: string;
 };
 
-const LETTERS: Record<Facade, string> = { north: "N", east: "E", south: "S", west: "W" };
+const LETTERS: Record<Facade, string> = {
+  north: "N",
+  northeast: "NE",
+  east: "E",
+  southeast: "SE",
+  south: "S",
+  southwest: "SW",
+  west: "W",
+  northwest: "NW",
+};
 const NEUTRAL = "#9AA7B4";
 
 // Meters east (x) and north (y) from the plot center -> map coordinates.
@@ -104,19 +113,42 @@ export default function ResultMap({
       fillOpacity: 0.12,
     }).addTo(group);
 
-    const sides: Record<Facade, L.LatLngTuple[]> = {
+    // the four sides are colored lines, the four diagonals are colored dots on the corners
+    const sides: Record<Side, L.LatLngTuple[]> = {
       north: [nw, ne],
       east: [ne, se],
       south: [se, sw],
       west: [sw, nw],
     };
+    const corners: Record<Exclude<Facade, Side>, L.LatLngTuple> = {
+      northeast: ne,
+      southeast: se,
+      southwest: sw,
+      northwest: nw,
+    };
     FACADES.forEach((facade) => {
       const isSelected = facade === selected;
-      L.polyline(sides[facade], {
-        color: heat ? heatColor(heat[facade]) : NEUTRAL,
-        weight: isSelected ? 12 : 7,
-        opacity: isSelected ? 1 : 0.8,
-        lineCap: "round",
+      const color = heat ? heatColor(heat[facade]) : NEUTRAL;
+      if (isSide(facade)) {
+        L.polyline(sides[facade], {
+          color,
+          weight: isSelected ? 12 : 7,
+          opacity: isSelected ? 1 : 0.8,
+          lineCap: "round",
+        })
+          .bindTooltip(tips[facade], { sticky: true })
+          .addTo(group);
+      }
+    });
+    FACADES.forEach((facade) => {
+      if (isSide(facade)) return;
+      const isSelected = facade === selected;
+      L.circleMarker(corners[facade], {
+        radius: isSelected ? 13 : 9,
+        color: isSelected ? "#072A4A" : "#FFFFFF",
+        weight: isSelected ? 3 : 2,
+        fillColor: heat ? heatColor(heat[facade]) : NEUTRAL,
+        fillOpacity: 1,
       })
         .bindTooltip(tips[facade], { sticky: true })
         .addTo(group);
@@ -125,9 +157,13 @@ export default function ResultMap({
     // compass letters around the plot
     const spots: Record<Facade, [number, number]> = {
       north: [0, hd + 3],
+      northeast: [hw + 3, hd + 3],
       east: [hw + 3, 0],
+      southeast: [hw + 3, -hd - 3],
       south: [0, -hd - 3],
+      southwest: [-hw - 3, -hd - 3],
       west: [-hw - 3, 0],
+      northwest: [-hw - 3, hd + 3],
     };
     FACADES.forEach((facade) => {
       const isSelected = facade === selected;
@@ -137,9 +173,9 @@ export default function ResultMap({
         keyboard: false,
         icon: L.divIcon({
           className: "",
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
-          html: `<div style="width:24px;height:24px;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 12px sans-serif;background:${isSelected ? "#C08649" : "#fff"};color:#072A4A;border:1px solid rgba(7,42,74,.3);box-shadow:0 1px 4px rgba(7,42,74,.25)">${LETTERS[facade]}</div>`,
+          iconSize: [28, 28],
+          iconAnchor: [14, 14],
+          html: `<div style="width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 11px sans-serif;background:${isSelected ? "#C08649" : "#fff"};color:#072A4A;border:1px solid rgba(7,42,74,.3);box-shadow:0 1px 4px rgba(7,42,74,.25)">${LETTERS[facade]}</div>`,
         }),
       }).addTo(group);
     });
