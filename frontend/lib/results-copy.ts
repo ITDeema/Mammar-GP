@@ -112,6 +112,17 @@ const ar = {
     maxHeight: "أقصى ارتفاع",
     setback: "أدنى ارتداد {facade}",
   },
+    summary: {
+    title: "ملخص سريع للموقع",
+    hint: "متوسط الواجهات الأربع، ومستوى الضوضاء في الموقع.",
+    meterLabel: "{metric}: {level}",
+  },
+  wind: {
+    title: "اتجاه الرياح",
+    from: "رياح قادمة من {facade}",
+    hint: "السهم يشير إلى الاتجاه الذي تهب نحوه الرياح.",
+    diagram: "بوصلة تعرض اتجاه الرياح السائدة",
+  },
   parcelNote:
     "ملاحظة على مستوى القطعة: مساحة هذه القطعة ({area} م²) قريبة من الحد الأدنى لتحقيق كامل الارتدادات مع مساحة بناء عملية. يُنصح بالتأكد من ذلك مع البلدية قبل بدء التصميم التفصيلي. لا علاقة لهذه الملاحظة بصحة التوصيات.",
   disclaimer:
@@ -245,6 +256,18 @@ const en: ResultsCopy = {
     maxHeight: "Maximum height",
     setback: "Minimum {facade} setback",
   },
+  summary: {
+    title: "Quick site summary",
+    hint: "Average of the four façades, and the site noise level.",
+    meterLabel: "{metric}: {level}",
+  },
+  wind: {
+    title: "Wind direction",
+    from: "Wind from the {facade}",
+    hint: "The arrow points the way the wind blows.",
+    diagram: "Compass showing the prevailing wind direction",
+  },
+  
   parcelNote:
     "Plot-level note: this plot's area ({area} m²) is close to the minimum needed to meet all setbacks with a practical building area. Check this with the municipality before detailed design. This note does not affect the validity of the recommendations.",
   disclaimer:
