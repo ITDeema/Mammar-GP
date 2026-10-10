@@ -4,6 +4,7 @@ import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import LevelMeter from "@/components/analysis/LevelMeter";
+import { NoiseGauge } from "@/components/analysis/SiteGauges";
 import StatusMessage from "@/components/analysis/StatusMessage";
 import {
   METRICS,
@@ -15,7 +16,9 @@ import {
 import type { Facade, IndicatorsData, SiteIndicators } from "@/lib/analysis-detail";
 import { USE_MOCK_DATA } from "@/lib/analysis";
 import { fill, useResultsCopy } from "@/lib/results-copy";
+import { TONE_FILL } from "@/lib/tone-styles";
 import type { Role } from "@/lib/user";
+import { TONE_FILL } from "@/lib/tone-styles";
 
 export type IndicatorsState =
   | { status: "loading" }
@@ -66,7 +69,12 @@ export default function IndicatorsPanel({ state, facade, role, onRetry }: Indica
       )}
 
       {state.status === "ready" && (
-        <>
+      <>
+          {detailed && (
+            <div className="mb-5 flex justify-center">
+              <NoiseGauge site={state.data.site} />
+            </div>
+          )}
           <p className="mb-4 text-sm text-navy-900/70">
             {fill(c.indicators.forFacade, { facade: c.facade.names[facade] })}
           </p>
@@ -89,7 +97,7 @@ export default function IndicatorsPanel({ state, facade, role, onRetry }: Indica
                    {detailed ? (
                     <div className="mt-2 h-1.5 overflow-hidden rounded-pill bg-navy-900/10">
                       <div
-                        className="h-full rounded-pill bg-gradient-to-r from-navy-800 to-gold-500 transition-all duration-500"
+                        className={`h-full rounded-pill transition-all duration-500 ${TONE_FILL[toneOf(metric, level)]}`}
                         style={{ width: `${metricFraction(metric, value) * 100}%` }}
                       />
                     </div>
