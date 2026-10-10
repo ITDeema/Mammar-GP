@@ -4,8 +4,26 @@
  * with real requests. The dashboard will not need to change.
  */
 
-export type Facade = "north" | "east" | "south" | "west";
-export const FACADES: Facade[] = ["north", "east", "south", "west"];
+// The four sides of the plot. Setbacks are set per side.
+export type Side = "north" | "east" | "south" | "west";
+export const SIDES: Side[] = ["north", "east", "south", "west"];
+
+// The eight directions a façade can face, clockwise from north.
+export type Facade = Side | "northeast" | "southeast" | "southwest" | "northwest";
+export const FACADES: Facade[] = [
+  "north",
+  "northeast",
+  "east",
+  "southeast",
+  "south",
+  "southwest",
+  "west",
+  "northwest",
+];
+
+export function isSide(facade: Facade): facade is Side {
+  return (SIDES as Facade[]).includes(facade);
+}
 
 export type FacadeIndicators = {
   radiation: number; // kWh/m²/day
@@ -43,16 +61,21 @@ export const DECISIONS: DecisionCode[] = [
 export type Constraints = {
   maxCoverage: number; // %
   maxHeight: number; // m
-  setbacks: Record<Facade, number>; // m
+  setbacks: Record<Side, number>; // m
 };
 
 /* ---------- mock generators ---------- */
 
+// The four diagonal directions sit between their two neighbours.
 const BASE: Record<Facade, FacadeIndicators> = {
   north: { radiation: 3.1, shade: 0.62, wind: 0.71, sky: 0.58 },
+  northeast: { radiation: 3.9, shade: 0.48, wind: 0.63, sky: 0.64 },
   east: { radiation: 4.8, shade: 0.35, wind: 0.55, sky: 0.69 },
+  southeast: { radiation: 5.6, shade: 0.26, wind: 0.48, sky: 0.75 },
   south: { radiation: 6.4, shade: 0.18, wind: 0.42, sky: 0.81 },
+  southwest: { radiation: 6.2, shade: 0.2, wind: 0.45, sky: 0.78 },
   west: { radiation: 5.9, shade: 0.22, wind: 0.48, sky: 0.74 },
+  northwest: { radiation: 4.5, shade: 0.42, wind: 0.6, sky: 0.66 },
 };
 
 function seed(id: string): number {
