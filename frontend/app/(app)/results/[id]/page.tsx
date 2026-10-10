@@ -15,6 +15,7 @@ import IndicatorsPanel, { SiteIndicatorsCard } from "@/components/analysis/Indic
 import type { IndicatorsState } from "@/components/analysis/IndicatorsPanel";
 import StatusMessage from "@/components/analysis/StatusMessage";
 import SummaryTiles from "@/components/analysis/SummaryTiles";
+import WindCard from "@/components/analysis/WindCard";
 import { usePlotCopy } from "@/components/analysis/usePlotCopy";
 import {
   FACADES,
@@ -316,6 +317,7 @@ function ResultsContent() {
       <div className="mt-5 grid gap-5 lg:grid-cols-[1.15fr_1fr]">
         <DecisionList role={role} indicators={ready} constraints={constraints} />
         <div className="flex flex-col gap-5">
+          {ready && <WindCard site={ready.site} />}
           {architect && ready && <SiteIndicatorsCard site={ready.site} />}
           <ConstraintsCard constraints={constraints} />
         </div>
