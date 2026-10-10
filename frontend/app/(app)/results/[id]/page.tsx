@@ -29,6 +29,7 @@ import {
   plotDimensions,
 } from "@/lib/analysis-detail";
 import type { Facade } from "@/lib/analysis-detail";
+import FacadePicker from "@/components/analysis/FacadePicker";
 import { formatDate } from "@/lib/format";
 import { useT } from "@/lib/i18n";
 import { useResults } from "@/lib/results";
@@ -301,11 +302,11 @@ function ResultsContent() {
             />
             <span>{c.map.legendHigh}</span>
           </div>
-          <SegmentedControl<Facade>
+          <FacadePicker
             label={c.facade.label}
             value={facade}
             onChange={setFacade}
-            options={FACADES.map((f) => ({ value: f, label: c.facade.names[f] }))}
+            names={c.facade.names}
           />
           </Card>
           {architect && ready && <SiteIndicatorsCard site={ready.site} />}
