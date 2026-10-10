@@ -3,6 +3,7 @@
 import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import LevelMeter from "@/components/analysis/LevelMeter";
 import StatusMessage from "@/components/analysis/StatusMessage";
 import {
   METRICS,
@@ -85,11 +86,22 @@ export default function IndicatorsPanel({ state, facade, role, onRetry }: Indica
                       )}
                     </dd>
                   </div>
-                  {detailed && (
+                   {detailed ? (
                     <div className="mt-2 h-1.5 overflow-hidden rounded-pill bg-navy-900/10">
                       <div
                         className="h-full rounded-pill bg-gradient-to-r from-navy-800 to-gold-500 transition-all duration-500"
                         style={{ width: `${metricFraction(metric, value) * 100}%` }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="mt-2">
+                      <LevelMeter
+                        level={level}
+                        tone={toneOf(metric, level)}
+                        label={fill(c.summary.meterLabel, {
+                          metric: c.indicators.metrics[metric],
+                          level: c.indicators.levels[level],
+                        })}
                       />
                     </div>
                   )}
